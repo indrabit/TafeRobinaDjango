@@ -2,6 +2,10 @@
 
 A Django application developed for Tafe QLD.
 
+# Docker Hub Project:
+
+https://hub.docker.com/r/pinktaco97/tafe-qld-campus-app-django
+
 # Useful Docker Commands:
 
 Run Command:
