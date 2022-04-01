@@ -15,7 +15,7 @@ def points_list(request):
 @api_view(['GET'])
 def point_detail(request, id):
 	try:
-		point = Point.objects.get(pk=id)
+		point = Point.objects.get(code=id)
 		serializer = PointSerializer(point)
 		return Response(serializer.data)
 	except Point.DoesNotExist:
