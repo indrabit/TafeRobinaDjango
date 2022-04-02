@@ -4,4 +4,4 @@ from poi.models import Point
 class PointSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Point
-		fields = ['title', 'discription', 'image']
+		fields = ['title', 'description', 'image']

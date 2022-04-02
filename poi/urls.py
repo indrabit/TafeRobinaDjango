@@ -3,6 +3,6 @@ from . import views
 
 # URL Config
 urlpatterns = [
-	path('points/', views.points_list),
-	path('points/<int:id>', views.point_detail)
+	path('', views.points_list),
+	path('<int:id>', views.point_detail)
 ]
