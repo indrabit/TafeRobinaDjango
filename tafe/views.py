@@ -55,7 +55,7 @@ def campus_hours(request, campusID):
 def region_campuses(request, regionID):
 	try:
 		campusRegions = Campus.objects.filter(
-			region=id
+			region=regionID
 		).filter(
 			listed=True
 		)
