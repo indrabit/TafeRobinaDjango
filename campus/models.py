@@ -13,7 +13,7 @@ class Region(models.Model):
 class Campus(models.Model):
 	name = models.CharField(max_length=255, unique=True)
 	description = models.TextField(blank=True)
-	address = models.CharField(max_length=255, unique=True)
+	address = models.CharField(max_length=255,blank=True)
 	region = models.ForeignKey(
 		Region,
 		on_delete=models.CASCADE,
@@ -53,6 +53,7 @@ class MenuItem(models.Model):
 class Event(models.Model):
 	title = models.CharField(max_length=255)
 	description = models.TextField(blank=True)
+	content  = models.TextField(blank=True)
 	location = models.ForeignKey(
 		Campus,
 		on_delete=models.CASCADE,

@@ -4,29 +4,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import *
 from .serializers import *
-from campus import serializers
+from tafe import serializers
 
-# Create your views here.
-@api_view(['GET'])
-def campus_list(request):
-	try:
-		campuses = Campus.objects.filter(
-			listed=True
-		)
-		serializer = CampusSerializer(campuses, many=True)
-		return Response(serializer.data)
-	except Campus.DoesNotExist:
-		return Response(status = status.HTTP_404_NOT_FOUND)
-
-@api_view(['GET'])
-def campus_detail(request, id):
-	try:
-		campus = Campus.objects.get(id=id)
-		serializer = CampusSerializer(campus)
-		return Response(serializer.data)
-	except Campus.DoesNotExist:
-		return Response(status = status.HTTP_404_NOT_FOUND)
-
+# Returns a list of all Regions.
 @api_view(['GET'])
 def regions_list(request):
 	try:
@@ -38,8 +18,41 @@ def regions_list(request):
 	except Region.DoesNotExist:
 		return Response(status = status.HTTP_404_NOT_FOUND)
 
+# Returns a list of all Campuses.
 @api_view(['GET'])
-def regions_campuses(request, id):
+def campus_list(request):
+	try:
+		campuses = Campus.objects.filter(
+			listed=True
+		)
+		serializer = CampusSerializer(campuses, many=True)
+		return Response(serializer.data)
+	except Campus.DoesNotExist:
+		return Response(status = status.HTTP_404_NOT_FOUND)
+
+# Returns Information about a Campus.
+@api_view(['GET'])
+def campus_detail(request, id):
+	try:
+		campus = Campus.objects.get(id=id)
+		serializer = CampusSerializer(campus)
+		return Response(serializer.data)
+	except Campus.DoesNotExist:
+		return Response(status = status.HTTP_404_NOT_FOUND)
+
+# Returns the Trading Hours of a Campus
+@api_view(['GET'])
+def campus_hours(request, campusID):
+    try:
+        campusHours = CampusHours.objects.get(campus=campusID)
+        serializer = CampusHoursSerializer(campusHours)
+        return Response(serializer.data)
+    except CampusHours.DoesNotExist:
+        return Response(status = status.HTTP_404_NOT_FOUND)
+
+# Returns a list of all Campuses from a Region.
+@api_view(['GET'])
+def region_campuses(request, regionID):
 	try:
 		campusRegions = Campus.objects.filter(
 			region=id
@@ -51,63 +64,44 @@ def regions_campuses(request, id):
 	except Campus.DoesNotExist:
 		return Response(status = status.HTTP_404_NOT_FOUND)
 
+# Returns a list of Resturants for a given Campus.
 @api_view(['GET'])
-def menu_category_list(request):
-	queryset = MenuCategory.objects.all()
-	serializer = MenuCategorySerializer(queryset, many=True)
-	return Response(serializer.data)
-
-@api_view(['GET'])
-def menu_category_campus(request, campus):
+def resturant_list(request, campusID):
 	try:
-		menuCategories = MenuCategory.objects.filter(
-			campus=campus
+		resturants = Restaurant.objects.filter(
+			campus=campusID
 		).filter(
 			listed=True
 		)
-		serializer = MenuCategorySerializer(menuCategories, many=True)
+		serializer = RestaurantSerializer(resturants, many=True)
 		return Response(serializer.data)
-	except MenuCategory.DoesNotExist:
+	except Restaurant.DoesNotExist:
 		return Response(status = status.HTTP_404_NOT_FOUND)
 
+# Returns the Trading Hours of a Resturant
 @api_view(['GET'])
-def menu_items_list(request):
-	queryset = MenuItem.objects.all()
-	serializer = MenuItemSerializer(queryset, many=True)
-	return Response(serializer.data)
+def resturant_hours(request, resturantID):
+    try:
+        resturantHours = RestaurantHours.objects.get(campus=resturantID)
+        serializer = RestaurantHoursSerializer(resturantHours)
+        return Response(serializer.data)
+    except RestaurantHours.DoesNotExist:
+        return Response(status = status.HTTP_404_NOT_FOUND)
 
-@api_view(['GET'])
-def menu_items_category(request, category):
-	try:
-		menuItems = MenuItem.objects.filter(
-			category=category
-		).filter(
-			listed=True
-		)
-		serializer = MenuItemSerializer(menuItems, many=True)
-		return Response(serializer.data)
-	except MenuItem.DoesNotExist:
-		return Response(status = status.HTTP_404_NOT_FOUND)
-
-
+# Returns a list of ALL Events.
 @api_view(['GET'])
 def events_list(request):
 	queryset = Event.objects.all()
 	serializer = EventSerializer(queryset, many=True)
 	return Response(serializer.data)
 
+# Returns a list of Upcoming Events.
 @api_view(['GET'])
 def events_upcoming(request):
 	queryset = Event.objects.filter(
 		listed=True
 	).filter(
-		event_start__gte=datetime.today()
+		eventStart__gte=datetime.today()
 	)
 	serializer = EventSerializer(queryset, many=True)
-	return Response(serializer.data)
-
-@api_view(['GET'])
-def users_list(request):
-	queryset = User.objects.all()
-	serializer = UserSerializer(queryset, many=True)
 	return Response(serializer.data)

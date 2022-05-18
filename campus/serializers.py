@@ -5,6 +5,7 @@ class RegionSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Region
 		fields = [
+			'id',
 			'name',
 			'description',
 			'image',
@@ -14,6 +15,7 @@ class CampusSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Campus
 		fields = [
+			'id',
 			'region',
 			'name',
 			'description',
@@ -26,7 +28,8 @@ class MenuCategorySerializer(serializers.ModelSerializer):
 	class Meta:
 		model = MenuCategory
 		fields = [
-			'campus'
+			'id',
+			'campus',
 			'name',
 			'description',
 			'image',
@@ -36,6 +39,7 @@ class MenuItemSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = MenuItem
 		fields = [
+			'id',
 			'category',
 			'name',
 			'description',
@@ -46,9 +50,11 @@ class EventSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Event
 		fields = [
+			'id',
 			'location',
 			'title',
 			'description',
+			'content',
 			'image',
 			'event_start',
 			'event_end',
