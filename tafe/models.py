@@ -18,6 +18,8 @@ class Campus(models.Model):
 		Region,
 		on_delete=models.CASCADE,
 	)
+	latitude = models.DecimalField(max_digits=8, decimal_places=6)
+	longitude = models.DecimalField(max_digits=9, decimal_places=6)
 	listed = models.BooleanField(default=True)
 
 	def __str__(self) -> str:

@@ -9,16 +9,7 @@ class RegionSerializer(serializers.ModelSerializer):
 			'name',
 		]
 
-class CampusSerializer(serializers.ModelSerializer):
-	class Meta:
-		model = Campus
-		fields = [
-			'id',
-			'region',
-			'name',
-			'description',
-			'address',
-		]
+
 
 class CampusHoursSerializer(serializers.ModelSerializer):
 	class Meta:
@@ -39,6 +30,19 @@ class CampusHoursSerializer(serializers.ModelSerializer):
             'satClose',
             'sunOpen',
             'sunClose',
+		]
+
+class CampusSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Campus
+		fields = [
+			'id',
+			'region',
+			'name',
+			'description',
+			'address',
+			'latitude',
+			'longitude',
 		]
 
 class RestaurantSerializer(serializers.ModelSerializer):
