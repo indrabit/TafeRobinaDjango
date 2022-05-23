@@ -1,3 +1,5 @@
-.env
+/db_backup/
 /docker_images/
 /docs/
+.env
+.gitignore
