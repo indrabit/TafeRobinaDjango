@@ -23,3 +23,9 @@
 ## docker build --tag pinktaco97/tafe-qld-campus-django:v5 .
 
 ## docker save -o docker_images/tafe-qld-campus-django-v5.tar pinktaco97/tafe-qld-campus-django:v5
+
+<!--setup -->
+## pip install requirements.txt
+## pip install django
+<!--create app -->
+## python manage.py startapp authentication
